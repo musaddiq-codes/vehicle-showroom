@@ -4,36 +4,66 @@ import mongoose from 'mongoose';
 import CarObject from '../models/carCategories.js';
 
 const router = express.Router();
+    
+// export const getCars = async (req, res) => {
+//     const { page } = req.query;
+
+//     try {
+//  const LIMIT = 4;
+//         console.log(page+' sdf')     
+//         const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
+
+//         const total = await CarObject.countDocuments({});
+//         const cars = await CarObject.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+//         // console.log(cars)
+//         console.log(page+'returned')     
+//         res.json({ data: cars, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
+
+
+//     } catch (error) {
+//         res.status(404).json({ message: error.message });
+//     }
+// }
 
 export const getCars = async (req, res) => {
     const { page } = req.query;
-
+    
     try {
         const LIMIT = 8;
         const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
-
+    
         const total = await CarObject.countDocuments({});
-        const cars = await CarObject.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+        const posts = await CarObject.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
 
-        res.json({ data: cars, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
-    } catch (error) {
+        res.json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
+    } catch (error) {    
         res.status(404).json({ message: error.message });
     }
 }
 
-export const getCarsBySearch = async (req, res) => {
-    const { searchQuery, tags } = req.query;
 
-    try {
-        const title = new RegExp(searchQuery, "i");
+// export const getCars = async (req, res) => {
+//     try {
+//         const { page } = req.query;
+//         const LIMIT = 4;
+//         const startIndex = (Number(page) - 1) * LIMIT;
 
-        const cars = await CarObject.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
+//         const [cars, total] = await Promise.all([
+//             CarObject.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex),
+//             CarObject.countDocuments({})
+//         ]);
 
-        res.json({ data: cars });
-    } catch (error) {
-        res.status(404).json({ message: error.message });
-    }
-}
+//         res.json({
+//             data: cars,
+//             currentPage: Number(page),
+//             numberOfPages: Math.ceil(total / LIMIT)
+//         });
+
+//     } catch (error) {
+//         console.error(error); // Log the error for debugging
+//         res.status(500).json({ message: 'Internal Server Error' }); // Send a generic error message
+//     }
+// }
 
 export const getCar = async (req, res) => {
     const { id } = req.params;

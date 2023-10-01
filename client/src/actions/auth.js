@@ -1,11 +1,11 @@
-import { AUTH } from '../constants/actionTypes';
+import { LOGIN, SIGNUP } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
-export const signin = (formData, router) => async (dispatch) => {
+export const login = (formData, router) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
 
-    dispatch({ type: AUTH, data });
+    dispatch({ type: LOGIN, data });
 
     router('/dashboard');
   } catch (error) {
@@ -19,10 +19,11 @@ export const signup = (formData, router) => async (dispatch) => {
     console.log(formData)
     const { data } = await api.signUp(formData);
 
-    dispatch({ type: AUTH, data });
-
-    router('/dashboard');
+    dispatch({ type: SIGNUP, data });
+    if (data) {
+      router('/dashboard');
+    }
   } catch (error) {
-    console.log(error); 
+    console.log(error);
   }
 };

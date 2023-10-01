@@ -27,10 +27,43 @@ export const signin = async (req, res) => {
 
 export const signup = async (req, res) => {
   const {
+    // name,
     email, password, firstName, lastName } = req.body;
- 
+  // name = name.trim();
+  // email = email.trim();
+  // password = password.trim();
+  // firstName = firstName.trim();
+  // lastName = lastName.trim();
+
+
 
   try {
+
+    // if (
+    //   // userName == "" ||
+    //   email == "" || password == "" || firstName == "" || lastName == "") {
+    //   res.json({
+    //     status: "Failed",
+    //     message: "Empty input not allowed!"
+    //   })
+    // }
+    // //  else if (!/^[a-zA-Z]*$/.test(userName)) {
+    // //   res.json({
+    // //     status: "Failed",
+    // //     message: 'Invalid name entered'
+    // //   })
+    // // }
+    // else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    //   res.json({
+    //     status: "Failed",
+    //     message: 'Invalid name entered'
+    //   })
+    // } else if (password.length < 8) {
+    //   res.json({
+    //     status: "Failed",
+    //     message: 'Invalid is too short!'
+    //   })
+    // }
 
     const oldUser = await UserModal.findOne({ email });
 

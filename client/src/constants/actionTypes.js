@@ -17,5 +17,6 @@ export const FETCH_ONE_CAR = 'FETCH_POST';
 export const END_LOADING = 'END_LOADING';
 export const START_LOADING = 'START_LOADING';
 // AUTH CONSTENTS
-export const AUTH = 'AUTH';
+export const LOGIN = 'LOGIN';
+export const SIGNUP = 'SIGNUP';
 export const LOGOUT = 'LOGOUT';

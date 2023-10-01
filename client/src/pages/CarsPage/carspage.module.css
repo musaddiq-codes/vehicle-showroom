@@ -1,0 +1,19 @@
+.cars_page_container {
+    display: flex;
+    justify-content: space-between;
+    height: 90vh;
+}
+
+.cars_posts {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: pink;
+}
+
+.cars_form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    background-color: bisque;
+}

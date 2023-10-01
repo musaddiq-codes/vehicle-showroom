@@ -21,19 +21,7 @@ export const getVehicles = async (req, res) => {
     }
 }
 
-export const getVehiclesBySearch = async (req, res) => {
-    const { searchQuery, tags } = req.query;
 
-    try {
-        const title = new RegExp(searchQuery, "i");
-
-        const vehicles = await VehicleObject.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
-
-        res.json({ data: vehicles });
-    } catch (error) {
-        res.status(404).json({ message: error.message });
-    }
-}
 
 export const getVehicle = async (req, res) => {
     const { id } = req.params;

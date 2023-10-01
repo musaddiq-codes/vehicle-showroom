@@ -1,0 +1,69 @@
+.nav_div {
+    background-color: lightblue;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.navigation {
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: yellow    ; */
+}
+
+.logo {
+    /* background-color: pink; */
+    text-decoration: none;
+    font-size: larger;
+    width: 2.5em;
+}
+
+.nav_list_container {
+    /* background-color: aqua; */
+    /* list-style: none; */
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.first_div{
+    width: 50%;
+    /* background-color: bisque; */
+}
+
+.nav_list {
+    /* background-color: red; */
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.reg_list_container {
+    /* background-color: blue    ; */
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+}
+
+
+
+/* commong styles */
+
+
+.text_deco{
+    text-decoration: none;
+    list-style: none;
+}
+
+.reg_list{
+    width: 30%  ;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}

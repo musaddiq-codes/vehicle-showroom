@@ -1,0 +1,7 @@
+.dashboard_container{
+    height: 95vh;
+    background-color: aqua;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

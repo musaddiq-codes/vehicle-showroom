@@ -1,5 +1,5 @@
 import express from 'express';
-// import bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
@@ -13,7 +13,7 @@ app.use(express.json({ limit: '30mb', extended: true }))
 app.use(express.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
  
-app.use('/vehicle', vehicleRoutes);
+app.use('/vehicles', vehicleRoutes);
 app.use('/cars', carRoutes);
 app.use("/user", userRouter);
 
