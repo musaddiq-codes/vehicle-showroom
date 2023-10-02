@@ -4,15 +4,16 @@ import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
 import { createVehicle, updateVehicle } from '../../actions/vehicleActions';
 
+const initialState = { type: '', color: '', model: '', regno: '', selectedFile: '' }
 const CarForm = ({ currentId, setCurrentId }) => {
-  const [VehicleData, setVehicleData] = useState({ type: '', color: '', model: '', regno: '', selectedFile: '' });
+  const [VehicleData, setVehicleData] = useState(initialState);
   const vehicle = useSelector((state) => (currentId ? state.vehicle.vehicle.find((vehicle) => vehicle._id === currentId) : null));
   const dispatch = useDispatch();
   const history = useNavigate();
 
   const clear = () => {
     setCurrentId(0);
-    setVehicleData({ type: '', color: '', model: '',  regno: '', selectedFile: '' });
+    setVehicleData({ type: 'bus', color: '', model: '', regno: '', selectedFile: '' });
   };
 
   useEffect(() => {
@@ -22,21 +23,23 @@ const CarForm = ({ currentId, setCurrentId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (currentId === 0) {
-      dispatch(createVehicle({ ...VehicleData, }, history));
-      clear();
+      const { type, color, model, regno, selectedFile } = VehicleData;
+      if (type && color && model && regno && selectedFile) {
+        dispatch(createVehicle({ ...VehicleData, }, history));
+        clear();
+      } else {
+        alert('fill all fields first')
+      }
     } else {
       dispatch(updateVehicle(currentId, { ...VehicleData, }));
       clear();
     }
   };
-
   return (
     <div>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <h4>{currentId ? `Editing "${vehicle?.type}"` : 'Registering a Vehicle'}</h4>
-
         <div>
           <label>Vehicle Type:</label>
           <select name="type" value={VehicleData.type} onChange={(e) => setVehicleData({ ...VehicleData, type: e.target.value })}>
@@ -45,15 +48,12 @@ const CarForm = ({ currentId, setCurrentId }) => {
             <option value="truck">Truck</option>
           </select>
         </div>
-
         <input name="color" placeholder="Vehicle Color" value={VehicleData.color} onChange={(e) => setVehicleData({ ...VehicleData, color: e.target.value })} />
         <input name="model" placeholder="Vehicle Model" value={VehicleData.model} onChange={(e) => setVehicleData({ ...VehicleData, model: e.target.value })} />
         <input name="regno" placeholder="Registration Number" value={VehicleData.regno} onChange={(e) => setVehicleData({ ...VehicleData, regno: e.target.value })} />
-
         <div>
           <FileBase type="file" multiple={false} onDone={({ base64 }) => setVehicleData({ ...VehicleData, selectedFile: base64 })} />
         </div>
-
         <button type="submit">Submit</button>
         <button onClick={clear}>Clear</button>
       </form>

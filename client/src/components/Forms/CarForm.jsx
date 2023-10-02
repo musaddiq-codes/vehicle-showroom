@@ -4,9 +4,9 @@ import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
 
 import { createCar, updateCar } from '../../actions/carActions';
-
+const initialState = { name: '', color: '', model: '', make: '', regno: '', selectedFile: '' }
 const CarForm = ({ currentId, setCurrentId }) => {
-    const [carData, setCarData] = useState({ name: '', color: '', model: '', make: '', regno: '', selectedFile: '' });
+    const [carData, setCarData] = useState(initialState);
     const car = useSelector((state) => (currentId ? state.cars.cars.find((message) => message._id === currentId) : null));
     // const car = useSelector((state) => (currentId ? state.cars.find((message) => message._id === currentId) : null));
     const dispatch = useDispatch();
@@ -28,8 +28,13 @@ const CarForm = ({ currentId, setCurrentId }) => {
         e.preventDefault();
 
         if (currentId === 0) {
-            dispatch(createCar({ ...carData, name: user?.result?.name }, history));
-            clear();
+            const { name, color, model, make, regno, selectedFile } = carData;
+            if (name && color && model && make && regno && selectedFile) {
+                dispatch(createCar({ ...carData, name: user?.result?.name }, history));
+                clear();
+            } else {
+                alert('first fill all the details')
+            }
         } else {
             dispatch(updateCar(currentId, { ...carData, name: user?.result?.name }));
             clear();
