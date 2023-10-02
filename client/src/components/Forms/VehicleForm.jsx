@@ -22,6 +22,7 @@ const CarForm = ({ currentId, setCurrentId }) => {
   }, [vehicle]);
 
   const handleSubmit = async (e) => {
+    console.log(VehicleData)
     e.preventDefault();
     if (currentId === 0) {
       const { type, color, model, regno, selectedFile } = VehicleData;

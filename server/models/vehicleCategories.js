@@ -6,7 +6,7 @@ const vehicleSchema = mongoose.Schema({
     color: { type: String, required: true },
     model: { type: String, required: true },
     regno: { type: String, required: true },
-    // selectedFile: { type: String, required: true },
+    selectedFile: { type: String, required: true },
 })
 
 var VehicleObject = mongoose.model('VehicleObject', vehicleSchema);

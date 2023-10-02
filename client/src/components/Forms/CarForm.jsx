@@ -26,7 +26,7 @@ const CarForm = ({ currentId, setCurrentId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log(carData)
         if (currentId === 0) {
             const { name, color, model, make, regno, selectedFile } = carData;
             if (name && color && model && make && regno && selectedFile) {
@@ -40,7 +40,6 @@ const CarForm = ({ currentId, setCurrentId }) => {
             clear();
         }
     };
-
 
     return (
         <div>

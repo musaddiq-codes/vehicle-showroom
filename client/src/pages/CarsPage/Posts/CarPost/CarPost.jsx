@@ -38,7 +38,6 @@ const CarPost = ({ car, setCurrentId }) => {
           </button>
         )}
         <img width={'50px'} src={`${car.selectedFile}`} />
-
       </div>
     </div>
   );
